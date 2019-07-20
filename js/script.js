@@ -1,11 +1,10 @@
 const delete_item = document.getElementsByClassName('delete_item');
-const basket_wrap = document.querySelector('.basket-wrap');
+const items_basket = document.querySelector('.items-basket');
 const buy_buttons = document.getElementsByClassName('item-button');
+const items_wrap = document.querySelector('.products-wrap');
 let basket = [];
-let savedItems = localStorage.getItem("basket");
 
 const addItemsToDOM = link => {
-    const items_wrap = document.querySelector('.products-wrap');
     const item_block = document.createElement('div');
     item_block.classList.add("item-block");
     const img = document.createElement('img');
@@ -69,9 +68,10 @@ const addItemsToBasket = link => {
     item_block.appendChild(model);
     item_block.appendChild(quantity);
     item_block.appendChild(button);
-    basket_wrap.appendChild(item_block);
+    items_basket.appendChild(item_block);
 }
 
+let savedItems = localStorage.getItem("basket");
 if ( savedItems != undefined ) {
    savedItems = JSON.parse(savedItems);
    basket = savedItems; 
@@ -80,52 +80,55 @@ if ( savedItems != undefined ) {
    } 
 }
 
+const main = response => {
+    for ( let i = 0; i < response.length; i++ ) {
+        addItemsToDOM(response[i])
+    }
+
+    for ( let i = 0; i < buy_buttons.length; i++ ) {
+        buy_buttons[i].addEventListener('click', () => {
+            const id = event.target.getAttribute('data');
+            for ( let i = 0; i < response.length; i++ ) {
+                if ( response[i].id == id) {
+                    let item = response[i].descr;
+                    console.log(item.quantity)
+                    if ( item.inBasket == false ) {
+                        addItemsToBasket(item);
+                        basket.push(item);
+                        item.inBasket = true;
+                    }
+                    else {
+                        item.quantity++; 
+                    }
+                    localStorage.setItem("basket", JSON.stringify(basket));
+                         
+                }
+            }
+        })
+    }
+    
+    document.addEventListener('mousemove', () => {
+        for ( let i = 0; i < delete_item.length; i++ ) {
+            delete_item[i].addEventListener('click', event => {
+                items_basket.removeChild(event.target.parentElement);
+                const id = event.target.getAttribute('data');
+                basket.forEach((item,i,arr)=>{
+                    if ( item.id == id ) {
+                        arr.splice(i,1);
+                        item.inBasket = false;
+                        localStorage.setItem("basket", JSON.stringify(arr)) 
+                    }
+                })
+            })
+        }
+    })
+}
+
 fetch('js/items.json')
      .then(resp => resp.json())
      .then(resp => {
           let items = resp;
-    
-          for ( let i = 0; i < items.length; i++ ) {
-              //console.log(items[i].descr.model)
-              addItemsToDOM(items[i])
-          }
-          for ( let i = 0; i < buy_buttons.length; i++ ) {
-              buy_buttons[i].addEventListener('click', () => {
-                  const id = event.target.getAttribute('data');
-                  for ( let i = 0; i < items.length; i++ ) {
-                      if ( items[i].id == id) {
-                          let item = items[i].descr;
-                          console.log(item)
-                          if ( item.inBasket == false ) {
-                              addItemsToBasket(item);
-                              basket.push(item);
-                              item.inBasket = true;
-                          }
-                          else {
-                              const item_quantity = document.querySelector('.item-quantity');
-                              item.quantity++; 
-                              item_quantity.innerHTML = item.quantity;
-                          }
-                          localStorage.setItem("basket", JSON.stringify(basket));
-                      }
-                  }
-              })
-          }
-          document.addEventListener('mousemove', () => {
-              for ( let i = 0; i < delete_item.length; i++ ) {
-                  delete_item[i].addEventListener('click', event => {
-                      basket_wrap.removeChild(event.target.parentElement);
-                      const id = event.target.getAttribute('data');
-                      basket.forEach((item,i,arr)=>{
-                          if ( item.id == id ) {
-                              arr.splice(i,1);
-                              item.inBasket = false;
-                              localStorage.setItem("basket", JSON.stringify(arr)) 
-                          }
-                      })
-                  })
-              }
-          })
+          main(items);
      })
 
 

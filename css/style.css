@@ -85,33 +85,34 @@
       .products-wrap .item-block button:hover {
         width: 100%; }
 
-.basket-wrap {
+.basket-wrap .items-basket {
   width: 500px;
   height: 300px;
   overflow-y: scroll;
   border: 1px solid;
-  box-sizing: border-box; }
-  .basket-wrap .item-basket-block {
+  box-sizing: border-box;
+  position: relative; }
+  .basket-wrap .items-basket .item-basket-block {
     width: 100%;
     border: 1px solid #e0dfde;
     padding: 10px;
     box-sizing: border-box; }
-    .basket-wrap .item-basket-block img {
+    .basket-wrap .items-basket .item-basket-block img {
       width: 100px;
       display: block; }
-    .basket-wrap .item-basket-block span.item-basket-sex {
+    .basket-wrap .items-basket .item-basket-block span.item-basket-sex {
       display: block;
       font-size: 16px;
       color: #8a8784;
       font-family: TruenoBd;
       padding-top: 15px; }
-    .basket-wrap .item-basket-block span.item-basket-model {
+    .basket-wrap .items-basket .item-basket-block span.item-basket-model {
       font-size: 16px;
       color: #8a8784;
       font-family: TruenoLt;
       padding-top: 5px;
       line-height: 1.5; }
-    .basket-wrap .item-basket-block span.item-basket-cost, .basket-wrap .item-basket-block span.item-dollar {
+    .basket-wrap .items-basket .item-basket-block span.item-basket-cost, .basket-wrap .items-basket .item-basket-block span.item-dollar {
       font-family: TruenoLt;
       display: inline-block;
       font-size: 24px;
