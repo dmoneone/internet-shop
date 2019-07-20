@@ -1,0 +1,27 @@
+[   
+         {
+             "id": "#16378271",
+             "descr": {
+                "model" : "Converse Breakpoin Suede Blue",
+                "sex" : "Men",
+                "cost" : 45,
+                "img_src" : "img/converse.png",
+                "id": "#16378271",
+                "inBasket": false,
+                "quantity": 1
+            }
+        },
+        {
+            "id": "#16378273",
+            "descr": {
+                "model" : "Converse CT All Star II",
+                "sex" : "Men/Women",
+                "cost" : 60,
+                "img_src" : "img/converse2.png",
+                "id": "#16378273",
+                "inBasket": false,
+                "quantity": 1
+            } 
+        }
+
+]

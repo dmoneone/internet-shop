@@ -1,0 +1,120 @@
+* {
+  /* HTML5 display-role reset for older browsers */ }
+  * html, * body, * div, * span, * applet, * object, * iframe, * h1, * h2, * h3, * h4, * h5, * h6, * p, * blockquote, * pre, * a, * abbr, * acronym, * address, * big, * cite, * code, * del, * dfn, * em, * img, * ins, * kbd, * q, * s, * samp, * small, * strike, * strong, * sub, * sup, * tt, * var, * b, * u, * i, * center, * dl, * dt, * dd, * ol, * ul, * li, * fieldset, * form, * label, * legend, * table, * caption, * tbody, * tfoot, * thead, * tr, * th, * td, * article, * aside, * canvas, * details, * embed, * figure, * figcaption, * footer, * header, * hgroup, * menu, * nav, * output, * ruby, * section, * summary, * time, * mark, * audio, * video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline; }
+  * article, * aside, * details, * figcaption, * figure, * footer, * header, * hgroup, * menu, * nav, * section {
+    display: block; }
+  * body {
+    line-height: 1; }
+  * ol, * ul {
+    list-style: none; }
+  * blockquote, * q {
+    quotes: none; }
+  * blockquote:before, * blockquote:after {
+    content: '';
+    content: none; }
+  * q:before, * q:after {
+    content: '';
+    content: none; }
+  * table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+@font-face {
+  font-family: TruenoLt;
+  src: url(../fonts/TruenoLt.otf); }
+@font-face {
+  font-family: TruenoUltBlk;
+  src: url(../fonts/TruenoUltBlk.otf); }
+@font-face {
+  font-family: TruenoBd;
+  src: url(../fonts/TruenoBd.otf); }
+.products-wrap {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-around; }
+  .products-wrap .item-block {
+    width: 195px;
+    height: 290px;
+    border: 1px solid #e0dfde;
+    padding: 30px; }
+    .products-wrap .item-block img {
+      width: 195px;
+      padding-top: 30px; }
+    .products-wrap .item-block span.item-sex {
+      display: block;
+      font-size: 16px;
+      color: #8a8784;
+      font-family: TruenoBd;
+      padding-top: 30px; }
+    .products-wrap .item-block h2.item-model {
+      font-size: 16px;
+      color: #8a8784;
+      font-family: TruenoLt;
+      padding-top: 10px;
+      line-height: 1.5; }
+    .products-wrap .item-block span.item-cost, .products-wrap .item-block span.item-dollar {
+      font-family: TruenoLt;
+      display: inline-block;
+      font-size: 24px;
+      color: #8a8784; }
+    .products-wrap .item-block button {
+      width: 100px;
+      height: 30px;
+      background: transparent;
+      border: 1px solid #8a8784;
+      display: block;
+      font-size: 13px;
+      color: #8a8784;
+      font-family: TruenoLt;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all ease 0.4s; }
+      .products-wrap .item-block button:hover {
+        width: 100%; }
+
+.basket-wrap {
+  width: 500px;
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid;
+  box-sizing: border-box; }
+  .basket-wrap .item-basket-block {
+    width: 100%;
+    border: 1px solid #e0dfde;
+    padding: 10px;
+    box-sizing: border-box; }
+    .basket-wrap .item-basket-block img {
+      width: 100px;
+      display: block; }
+    .basket-wrap .item-basket-block span.item-basket-sex {
+      display: block;
+      font-size: 16px;
+      color: #8a8784;
+      font-family: TruenoBd;
+      padding-top: 15px; }
+    .basket-wrap .item-basket-block span.item-basket-model {
+      font-size: 16px;
+      color: #8a8784;
+      font-family: TruenoLt;
+      padding-top: 5px;
+      line-height: 1.5; }
+    .basket-wrap .item-basket-block span.item-basket-cost, .basket-wrap .item-basket-block span.item-dollar {
+      font-family: TruenoLt;
+      display: inline-block;
+      font-size: 24px;
+      color: #8a8784; }
+
+/*# sourceMappingURL=style.css.map */

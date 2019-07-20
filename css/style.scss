@@ -1,0 +1,117 @@
+@import 'reset';
+
+@font-face {
+    font-family: TruenoLt; 
+    src: url(../fonts/TruenoLt.otf);
+}
+
+@font-face {
+    font-family: TruenoUltBlk; 
+    src: url(../fonts/TruenoUltBlk.otf);
+}
+
+@font-face {
+    font-family: TruenoBd; 
+    src: url(../fonts/TruenoBd.otf);
+}
+.products-wrap{
+    
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-around;
+    .item-block{
+        width: 195px;
+        height: 290px;
+        border: 1px solid #e0dfde;
+        padding: 30px;
+        img{
+            width: 195px;
+            padding-top: 30px;
+        }
+        span.item-sex{
+            display: block;
+            font-size: 16px;
+            color: #8a8784;
+            font-family: TruenoBd;
+            padding-top: 30px;
+        }
+        h2.item-model{
+            font-size: 16px;
+            color: #8a8784;
+            font-family: TruenoLt;
+            padding-top: 10px;
+            line-height: 1.5;
+        }
+        span.item-cost, span.item-dollar{
+            font-family: TruenoLt;
+            display: inline-block;
+            //transition: all ease 0.4s;
+            font-size: 24px;
+            color: #8a8784;
+            
+        }
+        button{
+            width: 100px;
+            height: 30px;
+            background: transparent;
+            border: 1px solid #8a8784;
+            display: block;
+            font-size: 13px;
+            color: #8a8784;
+            font-family: TruenoLt;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all ease 0.4s;
+            &:hover {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.basket-wrap{
+    width: 500px;
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid;
+    box-sizing: border-box;
+        .item-basket-block{
+            width: 100%;
+            border: 1px solid #e0dfde;
+            padding: 10px;
+            box-sizing: border-box;
+            img{
+                width: 100px;
+                display: block;
+            }
+            span.item-basket-sex{
+                display: block;
+                font-size: 16px;
+                color: #8a8784;
+                font-family: TruenoBd;
+                padding-top: 15px;
+            }
+            span.item-basket-model{
+                font-size: 16px;
+                color: #8a8784;
+                font-family: TruenoLt;
+                padding-top: 5px;
+                line-height: 1.5;
+            }
+            span.item-basket-cost, span.item-dollar{
+                font-family: TruenoLt;
+                display: inline-block;
+                //transition: all ease 0.4s;
+                font-size: 24px;
+                color: #8a8784;
+
+            }
+    }
+}
