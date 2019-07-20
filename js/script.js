@@ -1,3 +1,4 @@
+    
 const delete_item = document.getElementsByClassName('delete_item');
 const items_basket = document.querySelector('.items-basket');
 const buy_buttons = document.getElementsByClassName('item-button');
@@ -91,7 +92,7 @@ const main = response => {
             for ( let i = 0; i < response.length; i++ ) {
                 if ( response[i].id == id) {
                     let item = response[i].descr;
-                    console.log(item.quantity)
+                    console.log(item);
                     if ( item.inBasket == false ) {
                         addItemsToBasket(item);
                         basket.push(item);
@@ -110,7 +111,7 @@ const main = response => {
     document.addEventListener('mousemove', () => {
         for ( let i = 0; i < delete_item.length; i++ ) {
             delete_item[i].addEventListener('click', event => {
-                items_basket.removeChild(event.target.parentElement);
+                event.target.parentElement.remove();
                 const id = event.target.getAttribute('data');
                 basket.forEach((item,i,arr)=>{
                     if ( item.id == id ) {
@@ -128,7 +129,12 @@ fetch('js/items.json')
      .then(resp => resp.json())
      .then(resp => {
           let items = resp;
+          for ( let i = 0; i < items.length; i++ ) {
+              let savedItems = localStorage.getItem("basket");
+              if ( savedItems != undefined ) items[i].descr.inBasket = true;
+              else items[i].descr.inBasket = false;
+              console.log(items[i].descr);
+          }
           main(items);
      })
-
 
