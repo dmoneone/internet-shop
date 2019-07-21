@@ -63,6 +63,7 @@ const addItemsToBasket = link => {
     const quantity = document.createElement('span');
     quantity.innerHTML = link.count;
     quantity.classList.add("item-quantity");
+    quantity.setAttribute('data-id', link.id);
     item_block.appendChild(cost);
     item_block.appendChild(dollar);
     item_block.appendChild(img);
@@ -88,7 +89,7 @@ const addToBasket = arr => {
                 addItemsToBasket(item);
                 basket.push(item);
             } else {
-                basket[ItemInBasket].count++; 
+				document.querySelector(`span[data-id="${id}"]`).textContent = ++basket[ItemInBasket].count; 
 			}
 			
             localStorage.setItem("basket", JSON.stringify(basket));
