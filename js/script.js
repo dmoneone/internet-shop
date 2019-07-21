@@ -77,15 +77,20 @@ const addToBasket = arr => {
     let id = event.target.getAttribute('data');
     for ( let i = 0; i < arr.length; i++ ) {
         if ( arr[i].id == id) {
-            let item = arr[i].descr;
-            if ( item.inBasket == false ) {
+			let item = arr[i].descr,
+				ItemInBasket = -1;
+
+			for(let j = 0; j < basket.length; j++){
+				if(basket[j].id == id) ItemInBasket = j;
+			}
+
+            if (ItemInBasket < 0) {
                 addItemsToBasket(item);
                 basket.push(item);
-                item.inBasket = true;
-            }
-            else {
-                item.count++; 
-            }
+            } else {
+                basket[ItemInBasket].count++; 
+			}
+			
             localStorage.setItem("basket", JSON.stringify(basket));
         }
     }    
