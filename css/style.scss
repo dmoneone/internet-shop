@@ -14,6 +14,35 @@
     font-family: TruenoBd; 
     src: url(../fonts/TruenoBd.otf);
 }
+
+#basket-button{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #8a8784;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all ease 0.3s;
+    &:hover{
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+    }
+    span{
+        i{
+            font-size: 25px;
+            color: #8a8784;
+        }
+    }
+}
 .products-wrap{
     
     width: 1000px;
@@ -75,46 +104,147 @@
         }
     }
 }
-
-.basket-wrap{
-    .items-basket{
+#basket{
+    transition: all ease 0.4s;
+    position: fixed;
+    top: 20%;
+    right: -500px;
+    z-index: 100000000000000000000000000000000;
+    background: white;
+    .basket-wrap{;
         width: 500px;
-        height: 300px;
-        overflow-y: scroll;
-        border: 1px solid;
-        box-sizing: border-box;
         position: relative;
-            .item-basket-block{
-                width: 100%;
-                border: 1px solid #e0dfde;
-                padding: 10px;
+        z-index: 10;
+        .basket-bottom{
+            position: absolute;
+            background: #8a8784;
+            width: 100%;
+            height: 50px;
+            left: 0;
+            bottom: -49px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #8a8784;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            #buy-items ,#clean-items ,#in{
+                display: none;
+            }
+            #buy-items ,#clean-items{
+                font-family: TruenoLt;
+                font-size: 15px;
+                color: white;
+                height: 30px;
+                width: 100px;
+                background: transparent;
+                border: 1px solid white;
+                transition: all ease 0.3s;
+                &:hover{
+                    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+                }
+            }
+            #in{
+                font-family: TruenoLt;
+                font-size: 15px;
+                color: white;
+                height: 30px;
+                width: 100px;
+                background: transparent;
+                border: 1px solid white;
+                transition: all ease 0.3s;
                 box-sizing: border-box;
-                img{
-                    width: 100px;
-                    display: block;
+                padding-left: 5px;
+                &::placeholder{
+                    color: white;
                 }
-                span.item-basket-sex{
-                    display: block;
-                    font-size: 16px;
-                    color: #8a8784;
-                    font-family: TruenoBd;
-                    padding-top: 15px;
-                }
-                span.item-basket-model{
-                    font-size: 16px;
-                    color: #8a8784;
-                    font-family: TruenoLt;
-                    padding-top: 5px;
-                    line-height: 1.5;
-                }
-                span.item-basket-cost, span.item-dollar{
-                    font-family: TruenoLt;
-                    display: inline-block;
-                    //transition: all ease 0.4s;
-                    font-size: 24px;
-                    color: #8a8784;
+                &:focus{
+                    width: 160px;
+                } 
+            }
+            span{
+                font-family: TruenoLt;
+                font-size: 15px;
+                color: white;
+            }
+        }
+        .items-basket{
+            width: 100%;
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #8a8784;
+            box-sizing: border-box;
+            position: relative;
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
 
-                }
+            &::-webkit-scrollbar-track {
+                background-color: white;
+            }
+            &::-webkit-scrollbar-thumb {
+              background-color: #8a8784;
+              outline: 1px solid #8a8784;
+              border-radius: 20px;
+            }
+                .item-basket-block{
+                    width: 100%;
+                    border: 1px solid #e0dfde;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    img{
+                        width: 100px;
+                        display: block;
+                    }
+                    span.item-basket-sex{
+                        display: block;
+                        font-size: 16px;
+                        color: #8a8784;
+                        font-family: TruenoBd;
+                        padding-top: 15px;
+                    }
+                    span.item-basket-model{
+                        font-size: 16px;
+                        color: #8a8784;
+                        font-family: TruenoLt;
+                        padding-top: 5px;
+                        line-height: 1.5;
+                    }
+                    span.item-basket-cost, span.item-dollar{
+                        font-family: TruenoLt;
+                        display: inline-block;
+                        //transition: all ease 0.4s;
+                        font-size: 24px;
+                        color: #8a8784;
+
+                    }
+                    span.item-quantity{
+                        display: block;
+                        font-size: 13px;
+                        color: #8a8784;
+                        font-family: TruenoBd;
+                        padding-top: 5px;
+                        padding-bottom: 15px;
+                    }
+                    .delete_item{
+                        width: 100%;
+                        height: 30px;
+                        background: transparent;
+                        border: 1px solid #8a8784;
+                        font-family: TruenoLt;
+                        font-size: 15px;
+                        color: #8a8784;
+                        cursor: pointer;
+                        transition: all ease 0.3s;
+                        &:hover{
+                            box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+                        }
+                    }
+            }
         }
     }
 }

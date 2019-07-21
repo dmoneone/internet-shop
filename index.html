@@ -2,14 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="font_awesome/css/all.min.css">
     <title>Shop</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div id="basket-button"><span><i class="fas fa-shopping-basket"></i></span></div>
   <div class="products-wrap"></div>
-  <div class="basket-wrap">
-      <div class="items-basket">
-          
+  <div id="basket">
+      <div class="basket-wrap">
+          <div class="items-basket"></div>
+          <div class="basket-bottom">
+              <span>Sum: <span id="allPrice">0</span> $</span>
+              <button id="buy-items">Buy</button>
+              <button id="clean-items">Clean</button>
+              <input type="text" id="in" placeholder="Promocode">
+          </div>
       </div>
   </div>
    <script src="js/script.js"></script>   

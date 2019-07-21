@@ -18,6 +18,16 @@
                 "img_src" : "img/converse2.png",
                 "id": "#16378273"
             } 
+        },
+        {
+            "id": "#16378275",
+            "descr": {
+                "model" : "Asics GEL-Epirus",
+                "sex" : "Men",
+                "cost" : 100,
+                "img_src" : "img/asicsmen.png",
+                "id": "#16378275"
+            } 
         }
 
 ]

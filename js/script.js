@@ -3,8 +3,15 @@ const delete_item = document.getElementsByClassName('delete_item');
 const items_basket = document.querySelector('.items-basket');
 const buy_buttons = document.getElementsByClassName('item-button');
 const items_wrap = document.querySelector('.products-wrap');
+const promocode_discount = 0.15;
+const basket_wrap = document.querySelector('#basket');
+const promocodes = ['dmoneone'];
+let flag = false;
+let cost;
 let basket = [];
+let all_prices = [];
 let savedItems = localStorage.getItem("basket");
+let savedPrices = localStorage.getItem("prices array");
 
 const addItemsToDOM = link => {
     const item_block = document.createElement('div');
@@ -74,18 +81,24 @@ const addItemsToBasket = link => {
     items_basket.appendChild(item_block);
 }
 
+const sumPrices = arr => {
+    return arr.reduce((prev,current) => prev + current);       
+}
+
 const addToBasket = arr => {
     let id = event.target.getAttribute('data');
     for ( let i = 0; i < arr.length; i++ ) {
         if ( arr[i].id == id) {
 			let item = arr[i].descr,
 				ItemInBasket = -1;
-
-			for(let j = 0; j < basket.length; j++){
+            all_prices.push(item.cost);
+            localStorage.setItem('prices array', JSON.stringify(all_prices));
+            document.querySelector('#allPrice').innerHTML = sumPrices(all_prices);
+			for ( let j = 0; j < basket.length; j++ ) {
 				if(basket[j].id == id) ItemInBasket = j;
 			}
 
-            if (ItemInBasket < 0) {
+            if ( ItemInBasket < 0 ) {
                 addItemsToBasket(item);
                 basket.push(item);
             } else {
@@ -104,7 +117,51 @@ if ( savedItems != undefined ) {
        addItemsToBasket(basket[i]);
    }
 }
- 
+
+if ( savedPrices != undefined ) {
+   savedPrices = JSON.parse(savedPrices);
+   all_prices = savedPrices;
+   document.querySelector('#allPrice').innerHTML = sumPrices(all_prices);  
+}
+
+const buyItems = () => {
+    setTimeout(() => {
+       let val = document.querySelector('#in').value;
+       for ( let i = 0; i < promocodes.length; i++ ) {
+           if (promocodes[i] == val) {
+               cost = sumPrices(all_prices) - ( sumPrices(all_prices) * promocode_discount );
+           }
+           else {
+               cost = sumPrices(all_prices) 
+           }
+       }
+       alert(`Покупка соверешена. Общая стоимось состовляет: ${cost} $`)
+       //Отправляем на сервак
+       console.log(basket)  
+    },1000)
+}
+
+const cleanItems = () => {
+    while (items_basket.firstChild) {
+        items_basket.removeChild(items_basket.firstChild);
+    } 
+    basket = [];
+    all_prices = [];
+    localStorage.setItem('prices array', JSON.stringify(all_prices));
+    localStorage.setItem("basket", JSON.stringify(basket));    
+}
+
+const showBasket = () => {
+    if ( flag == false ) {
+       flag = true;
+       basket_wrap.style.right = 0 + "px"; 
+    }
+    else{
+       basket_wrap.style.right = -500 + "px"; 
+       flag = false;
+    }
+}
+
 const main = response => {
     
     for ( let i = 0; i < response.length; i++ ) {
@@ -126,7 +183,14 @@ const main = response => {
                     if ( item.id == id ) {
                         arr.splice(i,1);
                         item.inBasket = false;
-                        localStorage.setItem("basket", JSON.stringify(arr)) 
+                        localStorage.setItem("basket", JSON.stringify(arr));
+                        let ret = [];;
+                        while(all_prices.indexOf(item.cost) != -1){
+                            ret.push( all_prices.indexOf(item.cost) );
+                            all_prices.splice(all_prices.indexOf(item.cost), 1);
+                        }
+                        localStorage.setItem('prices array', JSON.stringify(all_prices));
+                        document.querySelector('#allPrice').innerHTML = sumPrices(all_prices);
                     }
                 })
             })
@@ -141,3 +205,20 @@ fetch('js/items.json')
           main(items);
      })
 
+document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener('mousemove', () => {
+        if ( items_basket.childNodes.length > 0) {
+           document.getElementById('buy-items').style.display = 'block';
+           document.getElementById('clean-items').style.display = 'block';
+           document.getElementById('in').style.display = 'block';
+        }
+        else{
+           document.getElementById('buy-items').style.display = 'none';
+           document.getElementById('clean-items').style.display = 'none';
+           document.getElementById('in').style.display = 'none'; 
+        }
+    })
+    document.getElementById('buy-items').addEventListener('click', buyItems);
+    document.getElementById('clean-items').addEventListener('click', cleanItems);
+    document.getElementById('basket-button').addEventListener('click', showBasket)
+});
