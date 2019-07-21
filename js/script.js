@@ -4,6 +4,7 @@ const items_basket = document.querySelector('.items-basket');
 const buy_buttons = document.getElementsByClassName('item-button');
 const items_wrap = document.querySelector('.products-wrap');
 let basket = [];
+let savedItems = localStorage.getItem("basket");
 
 const addItemsToDOM = link => {
     const item_block = document.createElement('div');
@@ -60,7 +61,7 @@ const addItemsToBasket = link => {
     button.classList.add("delete_item");
     button.setAttribute('data', link.id);
     const quantity = document.createElement('span');
-    quantity.innerHTML = link.quantity;
+    quantity.innerHTML = link.count;
     quantity.classList.add("item-quantity");
     item_block.appendChild(cost);
     item_block.appendChild(dollar);
@@ -72,40 +73,42 @@ const addItemsToBasket = link => {
     items_basket.appendChild(item_block);
 }
 
-let savedItems = localStorage.getItem("basket");
+const addToBasket = arr => {
+    let id = event.target.getAttribute('data');
+    for ( let i = 0; i < arr.length; i++ ) {
+        if ( arr[i].id == id) {
+            let item = arr[i].descr;
+            if ( item.inBasket == false ) {
+                addItemsToBasket(item);
+                basket.push(item);
+                item.inBasket = true;
+            }
+            else {
+                item.count++; 
+            }
+            localStorage.setItem("basket", JSON.stringify(basket));
+        }
+    }    
+}
+
 if ( savedItems != undefined ) {
    savedItems = JSON.parse(savedItems);
    basket = savedItems; 
    for ( let i = 0; i < basket.length; i++ ) {
        addItemsToBasket(basket[i]);
-   } 
+   }
 }
-
+ 
 const main = response => {
+    
     for ( let i = 0; i < response.length; i++ ) {
-        addItemsToDOM(response[i])
+        addItemsToDOM(response[i]);
+        response[i].descr.inBasket = false;
+        response[i].descr.count = 1;
     }
-
+    
     for ( let i = 0; i < buy_buttons.length; i++ ) {
-        buy_buttons[i].addEventListener('click', () => {
-            const id = event.target.getAttribute('data');
-            for ( let i = 0; i < response.length; i++ ) {
-                if ( response[i].id == id) {
-                    let item = response[i].descr;
-                    console.log(item);
-                    if ( item.inBasket == false ) {
-                        addItemsToBasket(item);
-                        basket.push(item);
-                        item.inBasket = true;
-                    }
-                    else {
-                        item.quantity++; 
-                    }
-                    localStorage.setItem("basket", JSON.stringify(basket));
-                         
-                }
-            }
-        })
+        buy_buttons[i].addEventListener('click', () => addToBasket(response))
     }
     
     document.addEventListener('mousemove', () => {
@@ -129,12 +132,6 @@ fetch('js/items.json')
      .then(resp => resp.json())
      .then(resp => {
           let items = resp;
-          for ( let i = 0; i < items.length; i++ ) {
-              let savedItems = localStorage.getItem("basket");
-              if ( savedItems != undefined ) items[i].descr.inBasket = true;
-              else items[i].descr.inBasket = false;
-              console.log(items[i].descr);
-          }
           main(items);
      })
 

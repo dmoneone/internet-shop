@@ -6,8 +6,7 @@
                 "sex" : "Men",
                 "cost" : 45,
                 "img_src" : "img/converse.png",
-                "id": "#16378271",
-                "quantity": 1
+                "id": "#16378271"
             }
         },
         {
@@ -17,8 +16,7 @@
                 "sex" : "Men/Women",
                 "cost" : 60,
                 "img_src" : "img/converse2.png",
-                "id": "#16378273",
-                "quantity": 1
+                "id": "#16378273"
             } 
         }
 
