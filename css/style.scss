@@ -74,10 +74,20 @@
         border: 1px solid #e0dfde;
         padding: 30px;
         transition: all ease 0.3s;
+        position: relative;
         &:hover{
             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
         }
-        img{
+        .flying-img{
+            width: 100px;
+            height: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all ease 5s;
+            opacity: 0;
+        }
+        .item-img{
             width: 195px;
             padding-top: 30px;
             transition: all ease 0.3s;
@@ -253,9 +263,10 @@
                     border: 1px solid #e0dfde;
                     padding: 10px;
                     box-sizing: border-box;
+                    position: relative;
                     img{
                         width: 100px;
-                        display: block;
+                        display: block;                        
                     }
                     span.item-basket-sex{
                         display: block;
@@ -304,4 +315,8 @@
             }
         }
     }
+}
+
+.flying-img{
+
 }

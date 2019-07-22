@@ -198,7 +198,12 @@ const main = response => {
                             all_prices.splice(all_prices.indexOf(item.cost), 1);
                         }
                         localStorage.setItem('prices array', JSON.stringify(all_prices));
-                        document.querySelector('#allPrice').innerHTML = sumPrices(all_prices);
+                        if (all_prices.length > 0 ) document.querySelector('#allPrice').innerHTML = sumPrices(all_prices);
+                        else{
+                           document.querySelector('#allPrice').innerHTML = 0;  
+                           localStorage.removeItem("basket");
+                           localStorage.removeItem('prices array');
+                        } 
                     }
                 })
             })
