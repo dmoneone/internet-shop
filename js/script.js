@@ -216,11 +216,13 @@ document.addEventListener("DOMContentLoaded", () => {
            document.getElementById('buy-items').style.opacity = '1';
            document.getElementById('clean-items').style.opacity = '1';
            document.getElementById('in').style.opacity = '1';
+           document.querySelector('.full-basket').style.opacity = '1';
         }
         else{
            document.getElementById('buy-items').style.opacity = '0';
            document.getElementById('clean-items').style.opacity = '0';
            document.getElementById('in').style.opacity = '0'; 
+           document.querySelector('.full-basket').style.opacity = '0';
         }
     })
     document.getElementById('buy-items').addEventListener('click', buyItems);
