@@ -80,11 +80,11 @@ const addItemsToBasket = link => {
     item_block.appendChild(button);
     items_basket.appendChild(item_block);
 }
-//sum of prices
+
 const sumPrices = arr => {
     return arr.reduce((prev,current) => prev + current);       
 }
-//add item to basket or to count item quantity
+
 const addToBasket = arr => {
     let id = event.target.getAttribute('data');
     for ( let i = 0; i < arr.length; i++ ) {
@@ -109,7 +109,7 @@ const addToBasket = arr => {
         }
     }    
 }
-//get items in localStorage
+
 if ( savedItems != undefined ) {
    savedItems = JSON.parse(savedItems);
    basket = savedItems; 
@@ -123,7 +123,7 @@ if ( savedPrices != undefined ) {
    all_prices = savedPrices;
    document.querySelector('#allPrice').innerHTML = sumPrices(all_prices);  
 }
-//buy items
+
 const buyItems = () => {
     setTimeout(() => {
        let val = document.querySelector('#in').value;
@@ -141,7 +141,7 @@ const buyItems = () => {
        console.log(basket)  
     },1000)
 }
-//clean
+
 const cleanItems = () => {
     while (items_basket.firstChild) {
         items_basket.removeChild(items_basket.firstChild);
@@ -155,7 +155,7 @@ const cleanItems = () => {
     localStorage.removeItem('prices array');
 }
 
-//show basket
+
 const showBasket = () => {
     if ( flag == false ) {
        flag = true;
@@ -171,7 +171,7 @@ const hideSuccsefulBlock = () => {
     cleanItems();
     
 }
-//json request
+
 const main = response => {
     
     for ( let i = 0; i < response.length; i++ ) {
@@ -212,7 +212,7 @@ fetch('js/items.json')
           let items = resp;
           main(items);
      })
-//DOMContentLoaded
+
 document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('mousemove', () => {
         if ( items_basket.childNodes.length > 0) {
