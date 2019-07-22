@@ -59,9 +59,14 @@
         height: 290px;
         border: 1px solid #e0dfde;
         padding: 30px;
+        transition: all ease 0.3s;
+        &:hover{
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        }
         img{
             width: 195px;
             padding-top: 30px;
+            transition: all ease 0.3s;
         }
         span.item-sex{
             display: block;
@@ -69,6 +74,7 @@
             color: #8a8784;
             font-family: TruenoBd;
             padding-top: 30px;
+            transition: all ease 0.3s;
         }
         h2.item-model{
             font-size: 16px;
@@ -76,6 +82,7 @@
             font-family: TruenoLt;
             padding-top: 10px;
             line-height: 1.5;
+            transition: all ease 0.3s;
         }
         span.item-cost, span.item-dollar{
             font-family: TruenoLt;
@@ -83,6 +90,7 @@
             //transition: all ease 0.4s;
             font-size: 24px;
             color: #8a8784;
+            transition: all ease 0.3s;
             
         }
         button{
@@ -105,6 +113,40 @@
     }
 }
 #basket{
+    .succsseful-block{
+        padding: 20px;
+        box-sizing: border-box;
+        width: 300px;
+        height: 150px;
+        background: #8a8784;
+        position: fixed;
+        top: calc(50% - 75px);
+        left: calc(50% - 150px);
+        opacity: 0;
+        transition: all ease 0.5s;
+        span{
+            text-align: left;
+            font-family: TruenoLt;
+            font-size: 15px;
+            color: white;
+        }
+        #ok{
+            display: block;
+            width: 70px;
+            height: 30px;
+            font-family: TruenoLt;
+            font-size: 13px;
+            color: white;
+            background: transparent;
+            border: 1px solid white;
+            transition: all ease 0.5s;
+            margin-top: 30px;
+            cursor: pointer;
+            &:hover{
+                width: 100%;
+            }
+        }
+    }
     transition: all ease 0.4s;
     position: fixed;
     top: 20%;
@@ -133,7 +175,7 @@
             justify-content: space-between;
             align-items: center;
             #buy-items ,#clean-items ,#in{
-                display: none;
+                opacity: 0;
             }
             #buy-items ,#clean-items{
                 font-family: TruenoLt;
@@ -143,7 +185,7 @@
                 width: 100px;
                 background: transparent;
                 border: 1px solid white;
-                transition: all ease 0.3s;
+                transition: all ease 0.5s;
                 &:hover{
                     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
                 }
@@ -156,7 +198,7 @@
                 width: 100px;
                 background: transparent;
                 border: 1px solid white;
-                transition: all ease 0.3s;
+                transition: all ease 0.5s;
                 box-sizing: border-box;
                 padding-left: 5px;
                 &::placeholder{

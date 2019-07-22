@@ -12,7 +12,7 @@ let basket = [];
 let all_prices = [];
 let savedItems = localStorage.getItem("basket");
 let savedPrices = localStorage.getItem("prices array");
-
+//addToDOM
 const addItemsToDOM = link => {
     const item_block = document.createElement('div');
     item_block.classList.add("item-block");
@@ -33,7 +33,7 @@ const addItemsToDOM = link => {
     dollar.classList.add("item-dollar");
     const button = document.createElement('button');
     button.classList.add("item-button");
-    button.innerHTML = "Buy";
+    button.innerHTML = "Add";
     button.setAttribute('data', link.id);
     item_block.appendChild(cost);
     item_block.appendChild(dollar);
@@ -80,11 +80,11 @@ const addItemsToBasket = link => {
     item_block.appendChild(button);
     items_basket.appendChild(item_block);
 }
-
+//sum of prices
 const sumPrices = arr => {
     return arr.reduce((prev,current) => prev + current);       
 }
-
+//add item to basket or to count item quantity
 const addToBasket = arr => {
     let id = event.target.getAttribute('data');
     for ( let i = 0; i < arr.length; i++ ) {
@@ -109,7 +109,7 @@ const addToBasket = arr => {
         }
     }    
 }
-
+//get items in localStorage
 if ( savedItems != undefined ) {
    savedItems = JSON.parse(savedItems);
    basket = savedItems; 
@@ -123,7 +123,7 @@ if ( savedPrices != undefined ) {
    all_prices = savedPrices;
    document.querySelector('#allPrice').innerHTML = sumPrices(all_prices);  
 }
-
+//buy items
 const buyItems = () => {
     setTimeout(() => {
        let val = document.querySelector('#in').value;
@@ -135,12 +135,14 @@ const buyItems = () => {
                cost = sumPrices(all_prices) 
            }
        }
-       alert(`Покупка соверешена. Общая стоимось состовляет: ${cost} $`)
+       document.querySelector('#cost').innerHTML = cost;
+       document.querySelector('.succsseful-block').style.opacity = '1';
+       document.querySelector('.succsseful-block').style.display = 'block'; 
        //Отправляем на сервак
        console.log(basket)  
     },1000)
 }
-
+//clean
 const cleanItems = () => {
     while (items_basket.firstChild) {
         items_basket.removeChild(items_basket.firstChild);
@@ -149,8 +151,11 @@ const cleanItems = () => {
     all_prices = [];
     localStorage.setItem('prices array', JSON.stringify(all_prices));
     localStorage.setItem("basket", JSON.stringify(basket));    
+    document.querySelector('#allPrice').innerHTML = 0;
+    localStorage.removeItem("basket");
+    localStorage.removeItem('prices array');
 }
-
+//show basket
 const showBasket = () => {
     if ( flag == false ) {
        flag = true;
@@ -161,12 +166,14 @@ const showBasket = () => {
        flag = false;
     }
 }
-
+const hideSuccsefulBlock = () => {
+    document.querySelector('.succsseful-block').style.opacity = '0'; 
+}
+//json request
 const main = response => {
     
     for ( let i = 0; i < response.length; i++ ) {
         addItemsToDOM(response[i]);
-        response[i].descr.inBasket = false;
         response[i].descr.count = 1;
     }
     
@@ -182,7 +189,6 @@ const main = response => {
                 basket.forEach((item,i,arr)=>{
                     if ( item.id == id ) {
                         arr.splice(i,1);
-                        item.inBasket = false;
                         localStorage.setItem("basket", JSON.stringify(arr));
                         let ret = [];;
                         while(all_prices.indexOf(item.cost) != -1){
@@ -204,21 +210,22 @@ fetch('js/items.json')
           let items = resp;
           main(items);
      })
-
+//DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('mousemove', () => {
         if ( items_basket.childNodes.length > 0) {
-           document.getElementById('buy-items').style.display = 'block';
-           document.getElementById('clean-items').style.display = 'block';
-           document.getElementById('in').style.display = 'block';
+           document.getElementById('buy-items').style.opacity = '1';
+           document.getElementById('clean-items').style.opacity = '1';
+           document.getElementById('in').style.opacity = '1';
         }
         else{
-           document.getElementById('buy-items').style.display = 'none';
-           document.getElementById('clean-items').style.display = 'none';
-           document.getElementById('in').style.display = 'none'; 
+           document.getElementById('buy-items').style.opacity = '0';
+           document.getElementById('clean-items').style.opacity = '0';
+           document.getElementById('in').style.opacity = '0'; 
         }
     })
     document.getElementById('buy-items').addEventListener('click', buyItems);
     document.getElementById('clean-items').addEventListener('click', cleanItems);
-    document.getElementById('basket-button').addEventListener('click', showBasket)
+    document.getElementById('basket-button').addEventListener('click', showBasket);
+    document.getElementById('ok').addEventListener('click', hideSuccsefulBlock)
 });
