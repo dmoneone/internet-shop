@@ -136,7 +136,6 @@ const buyItems = () => {
            }
        }
        document.querySelector('#cost').innerHTML = cost;
-       document.querySelector('.succsseful-block').style.opacity = '1';
        document.querySelector('.succsseful-block').style.display = 'block'; 
        //Отправляем на сервак
        console.log(basket)  
@@ -167,7 +166,7 @@ const showBasket = () => {
     }
 }
 const hideSuccsefulBlock = () => {
-    document.querySelector('.succsseful-block').style.opacity = '0'; 
+    document.querySelector('.succsseful-block').style.display = 'none'; 
 }
 //json request
 const main = response => {

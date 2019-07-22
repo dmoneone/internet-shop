@@ -132,7 +132,7 @@
     position: fixed;
     top: calc(50% - 75px);
     left: calc(50% - 150px);
-    opacity: 0;
+    display: none;
     transition: all ease 0.5s; }
     #basket .succsseful-block span {
       text-align: left;
