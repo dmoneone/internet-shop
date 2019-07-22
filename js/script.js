@@ -154,6 +154,7 @@ const cleanItems = () => {
     localStorage.removeItem("basket");
     localStorage.removeItem('prices array');
 }
+
 //show basket
 const showBasket = () => {
     if ( flag == false ) {
@@ -167,6 +168,8 @@ const showBasket = () => {
 }
 const hideSuccsefulBlock = () => {
     document.querySelector('.succsseful-block').style.display = 'none'; 
+    cleanItems();
+    
 }
 //json request
 const main = response => {
